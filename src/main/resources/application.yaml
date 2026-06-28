@@ -1,0 +1,52 @@
+server:
+  port: 8888
+
+spring:
+  application:
+    name: infra-config-service
+
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://bitbucket.org/alangb01/proyecto-bc-config.git
+          default-label: main
+          clone-on-start: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus
+  endpoint:
+    health:
+      show-details: always
+  metrics:
+    tags:
+      application: ${spring.application.name}
+  tracing:             # ✅ trazas habilitadas via Actuator
+    enabled: true
+    sampling:
+      probability: 1.0
+  otlp:                # ✅ nuevo bloque para OpenTelemetry
+    tracing:
+      endpoint: http://localhost:4317
+    metrics:
+      export:
+        enabled: true
+
+
+otel:                  # ⚠️ opcional si usas configuración manual
+  exporter:
+    otlp:
+      endpoint: http://localhost:4317
+
+  resource:
+    attributes:
+      service.name: ${spring.application.name}
+      service.version: 1.0.0
+
+logging:
+  level:
+    root: INFO
+    card-ops-producer: DEBUG

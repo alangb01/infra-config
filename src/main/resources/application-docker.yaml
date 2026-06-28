@@ -1,0 +1,12 @@
+server:
+  port: 18888
+
+management:
+  otlp:
+    tracing:
+      endpoint: http://otel-collector:4317
+
+otel:
+  exporter:
+    otlp:
+      endpoint: http://otel-collector:4317
