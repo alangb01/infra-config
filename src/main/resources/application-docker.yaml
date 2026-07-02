@@ -1,0 +1,21 @@
+server:
+  port: 9888
+
+spring:
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://bitbucket.org/alangb01/proyecto-bc-config.git
+          default-label: main
+          clone-on-start: true
+
+management:
+  otlp:
+    tracing:
+      endpoint: http://otel-collector:4317
+
+otel:                  # ⚠️ opcional si usas configuración manual
+  exporter:
+    otlp:
+      endpoint: http://otel-collector:4317
