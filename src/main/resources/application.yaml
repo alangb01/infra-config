@@ -49,4 +49,4 @@ otel:                  # ⚠️ opcional si usas configuración manual
 logging:
   level:
     root: INFO
-    card-ops-producer: DEBUG
+    pe.nom.charlygastelo.app: DEBUG
